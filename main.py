@@ -56,20 +56,23 @@ class Folder:
 
         :return:
         """
-        file_count = 0
-        for filepath in self._get_file_paths():
-            path = Path(filepath)
-            extension = filepath.split('.')[-1]
+        try:
+            file_count = 0
+            for filepath in self._get_file_paths():
+                path = Path(filepath)
+                extension = Path(filepath).suffix.split('.')[-1]
 
-            if extension in extensions:
-                subfolder_name = get_subfolder_name_by_extension(extension)
-                self._create_subfolder(subfolder_name)
+                if extension in extensions:
+                    subfolder_name = get_subfolder_name_by_extension(extension)
+                    self._create_subfolder(subfolder_name)
 
-                new_path = Path(self.path, subfolder_name, path.name)
-                logging.info(f'{path.name} ---> {"/".join(new_path.parts[-2:])}')
-                path.rename(new_path)
-                file_count += 1
-        logging.info(f'Files sorted: {file_count}')
+                    new_path = Path(self.path, subfolder_name, path.name)
+                    logging.info(f'{path.name} ---> {"/".join(new_path.parts[-2:])}')
+                    path.rename(new_path)
+                    file_count += 1
+            logging.info(f'Files sorted: {file_count}')
+        except Exception as ex:
+            logging.error(f'Failed to sort files -> {repr(ex)}')
 
 
 @timer
