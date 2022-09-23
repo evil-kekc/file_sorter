@@ -1,9 +1,14 @@
+import sys
 import time
 from typing import Iterable, Union
 import logging
 import os
 
 from config import *
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui import QIcon
+from ui import Ui_MainWindow
 
 logs_folder.mkdir() if not logs_folder.exists() else None
 
@@ -14,21 +19,33 @@ logging.basicConfig(filename=f"logs/file_sorter.log",
                     encoding='utf-8')
 
 
-def timer(func):
-    def wrapper(*args, **kwargs):
-        start_time = time.time()
-        func(*args, **kwargs)
-        end_time = time.time()
-        logging.info(f'{func.__name__} took {end_time - start_time} seconds')
-        print(f'{func.__name__} took {end_time - start_time} seconds')
+class Sorter(QtWidgets.QMainWindow):
+    def __init__(self):
+        super(Sorter, self).__init__()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
+        self.init_UI()
 
-    return wrapper
+    def init_UI(self):
+        self.setWindowTitle('File Sorter')
+        self.setWindowIcon(QIcon('Icon.png'))
+
+        self.ui.lineEdit.setPlaceholderText('Enter path to the folder to sort')
+        self.ui.pushButton.clicked.connect(self.sort)
+
+    def sort(self):
+        input_path = self.ui.lineEdit.text()
+        print(fr'{input_path}')
+        folder = Folder(fr'{input_path}')
+        folder.sort_files_by_extensions()
+        # self.ui.label_3.setText(f'Sorting files by extensions in {input_path}')
 
 
-class Folder:
+class Folder(Sorter):
     """A class to organize log files. """
 
     def __init__(self, path: Union[Path, str]) -> None:
+        super(Sorter, self).__init__()
         self.path = path
 
     def _get_file_paths(self) -> Iterable:
@@ -50,6 +67,7 @@ class Folder:
                 subfolder_path.mkdir()
         except OSError:
             logging.error(f'Failed to create subfolder')
+            self.ui.label_3.setText(f'Failed to create subfolder')
 
     def sort_files_by_extensions(self) -> None:
         """Sorting files by extensions
@@ -71,18 +89,15 @@ class Folder:
                     path.rename(new_path)
                     file_count += 1
             logging.info(f'Files sorted: {file_count}')
+            # self.ui.label_3.setText(f'Files sorted: {file_count}')
         except Exception as ex:
             logging.error(f'Failed to sort files -> {repr(ex)}')
-
-
-@timer
-def sorted_files() -> None:
-    """Sorting files by extension"""
-    folder = Folder(folder_path)
-    print('Sorting files by extensions in', folder_path)
-    logging.info(f'Sorting files by extensions in {folder_path}')
-    folder.sort_files_by_extensions()
+            # self.ui.label_3.setText(f'Failed to sort files -> {repr(ex)}')
 
 
 if __name__ == "__main__":
-    sorted_files()
+    app = QtWidgets.QApplication([])
+    application = Sorter()
+    application.show()
+
+    sys.exit(app.exec_())

@@ -1,7 +1,7 @@
 from itertools import chain
 from pathlib import Path
 
-folder_path = Path(r'X:\test')
+# folder_path = Path(r'X:\test')
 
 subfolder_name_to_extensions = {
     'video': ('mp4', 'mov', 'avi', 'mkv', 'wmv', 'mpg', 'mpeg', 'm4v', 'h264'),

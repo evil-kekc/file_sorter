@@ -3,3 +3,5 @@ __pycache__
 logs
 venv/
 logs/
+/Icon.png
+/UI.ui
