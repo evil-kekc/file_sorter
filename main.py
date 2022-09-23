@@ -1,13 +1,12 @@
-import sys
-import time
-from typing import Iterable, Union
 import logging
 import os
+import sys
+from typing import Iterable, Union
+
+from PyQt5 import QtWidgets
+from PyQt5.QtGui import QIcon
 
 from config import *
-
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtGui import QIcon
 from ui import Ui_MainWindow
 
 logs_folder.mkdir() if not logs_folder.exists() else None
@@ -35,10 +34,16 @@ class Sorter(QtWidgets.QMainWindow):
 
     def sort(self):
         input_path = self.ui.lineEdit.text()
-        print(fr'{input_path}')
+        if input_path == '':
+            self.ui.label_3.setText(f'Enter path to the folder to sort')
+            self.ui.label.repaint()
+            return self.sort
+        start_text = f'Sorting files by extensions in {input_path}'
+        self.ui.label_3.setText(f'Sorting files by extensions in {input_path}')
         folder = Folder(fr'{input_path}')
-        folder.sort_files_by_extensions()
-        # self.ui.label_3.setText(f'Sorting files by extensions in {input_path}')
+        output = folder.sort_files_by_extensions()
+        self.ui.label_3.setText(f'{start_text}\n{output}')
+        self.ui.label.repaint()
 
 
 class Folder(Sorter):
@@ -62,14 +67,13 @@ class Folder(Sorter):
         :return:
         """
         try:
-            subfolder_path = self.path / subfolder_name
+            subfolder_path = Path(fr'{self.path}\{subfolder_name}')
             if not subfolder_path.exists():
                 subfolder_path.mkdir()
         except OSError:
             logging.error(f'Failed to create subfolder')
-            self.ui.label_3.setText(f'Failed to create subfolder')
 
-    def sort_files_by_extensions(self) -> None:
+    def sort_files_by_extensions(self) -> str:
         """Sorting files by extensions
 
         :return:
@@ -89,10 +93,10 @@ class Folder(Sorter):
                     path.rename(new_path)
                     file_count += 1
             logging.info(f'Files sorted: {file_count}')
-            # self.ui.label_3.setText(f'Files sorted: {file_count}')
+            return f'Files sorted: {file_count}'
         except Exception as ex:
             logging.error(f'Failed to sort files -> {repr(ex)}')
-            # self.ui.label_3.setText(f'Failed to sort files -> {repr(ex)}')
+            return f'Failed to sort files -> {repr(ex)}'
 
 
 if __name__ == "__main__":

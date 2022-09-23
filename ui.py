@@ -23,7 +23,7 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         MainWindow.setFont(font)
         MainWindow.setStyleSheet("background-color: 22222e\n"
-"")
+                                 "")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setStyleSheet("background-color: rgb(34, 34, 46);")
         self.centralwidget.setObjectName("centralwidget")
@@ -60,11 +60,11 @@ class Ui_MainWindow(object):
         self.lineEdit.setMouseTracking(True)
         self.lineEdit.setAcceptDrops(True)
         self.lineEdit.setStyleSheet("color: rgb(255, 255, 255);\n"
-"background-color: rgb(34, 34, 46);\n"
-"border: 2px solid #f66867;\n"
-"border-radius: 30;\n"
-"\n"
-"")
+                                    "background-color: rgb(34, 34, 46);\n"
+                                    "border: 2px solid #f66867;\n"
+                                    "border-radius: 30;\n"
+                                    "\n"
+                                    "")
         self.lineEdit.setText("")
         self.lineEdit.setAlignment(QtCore.Qt.AlignCenter)
         self.lineEdit.setObjectName("lineEdit")
@@ -78,14 +78,14 @@ class Ui_MainWindow(object):
         self.pushButton.setFont(font)
         self.pushButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.pushButton.setStyleSheet("QPushButton {\n"
-"    color: rgb(255, 255, 255);\n"
-"    background-color:#fb5b5d;\n"
-"    border-radius: 20px;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background-color: #fa4244;\n"
-"}")
+                                      "    color: rgb(255, 255, 255);\n"
+                                      "    background-color:#fb5b5d;\n"
+                                      "    border-radius: 20px;\n"
+                                      "}\n"
+                                      "\n"
+                                      "QPushButton:pressed {\n"
+                                      "    background-color: #fa4244;\n"
+                                      "}")
         self.pushButton.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
         self.pushButton.setObjectName("pushButton")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
@@ -93,7 +93,7 @@ class Ui_MainWindow(object):
         self.label_3.setGeometry(QtCore.QRect(40, 420, 371, 71))
         font = QtGui.QFont()
         font.setFamily("Arial")
-        font.setPointSize(10)
+        font.setPointSize(12)
         self.label_3.setFont(font)
         self.label_3.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_3.setText("")
@@ -126,6 +126,7 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
