@@ -93,7 +93,7 @@ class Ui_MainWindow(object):
         self.label_3.setGeometry(QtCore.QRect(40, 420, 371, 71))
         font = QtGui.QFont()
         font.setFamily("Arial")
-        font.setPointSize(12)
+        font.setPointSize(10)
         self.label_3.setFont(font)
         self.label_3.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_3.setText("")
@@ -121,6 +121,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "FILE SORTER"))
         self.pushButton.setText(_translate("MainWindow", "Sort"))
+        self.pushButton.setShortcut(_translate("MainWindow", "Return"))
         self.label_4.setText(_translate("MainWindow", "Enter the folder path to sort below:"))
 
 
