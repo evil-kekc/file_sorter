@@ -47,7 +47,7 @@ class Ui_MainWindow(object):
         self.label_2 = QtWidgets.QLabel(self.frame)
         self.label_2.setGeometry(QtCore.QRect(90, 110, 281, 141))
         self.label_2.setText("")
-        self.label_2.setPixmap(QtGui.QPixmap("Icon.png"))
+        self.label_2.setPixmap(QtGui.QPixmap("images/Icon.png"))
         self.label_2.setObjectName("label_2")
         self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit.setGeometry(QtCore.QRect(40, 340, 371, 60))
