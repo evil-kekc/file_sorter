@@ -12,7 +12,7 @@ Python script for sorting files into folders by extensions
 
 1. Clone the [repository](https://github.com/evil-kekc/file_sorter):
 
-```python
+```
 git clone https://github.com/evil-kekc/file_sorter --branch develop --single-branch
 ```
 
@@ -34,6 +34,16 @@ subfolder_name_to_extensions = {
     'torrent': ('torrent',),
     'exe': ('exe',)
 }
+```
+
+3. Installing libraries
+```
+pip install -r requirements.txt
+```
+
+4. Run [main.py](main.py)
+```
+python main.py
 ```
 
 ## Logs
