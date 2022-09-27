@@ -26,13 +26,21 @@ class Sorter(QtWidgets.QMainWindow):
         self.init_UI()
 
     def init_UI(self):
+        """Initialize the main window
+
+        :return:
+        """
         self.setWindowTitle('File Sorter')
-        self.setWindowIcon(QIcon('Icon.png'))
+        self.setWindowIcon(QIcon('images/Icon.png'))
 
         self.ui.lineEdit.setPlaceholderText('Enter path to the folder to sort')
         self.ui.pushButton.clicked.connect(self.sort)
 
     def sort(self):
+        """Sorter function
+
+        :return:
+        """
         input_path = self.ui.lineEdit.text()
         if input_path == '':
             self.ui.label_3.setText(f'Enter path to the folder to sort')
